@@ -217,6 +217,8 @@ Cam::Cam(const char *_device, mode_t _mode, int _width, int _height, int _fps)
     throw std::runtime_error("unable to start capture");
   rgb_frame = new unsigned char[width * height * 3];
   last_yuv_frame = new unsigned char[width * height * 2];
+
+  sleep(1);  // XXX hack to make sure everything is already initialized before user has a chance to cal set_v4l2_control (which errors out otherwise)
 }
 
 Cam::~Cam()
